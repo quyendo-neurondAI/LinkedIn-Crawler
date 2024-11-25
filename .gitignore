@@ -1,2 +1,4 @@
 .venv
 Wyoming.csv
+send_linkedin_msg_pkg.egg-info
+__pycache__

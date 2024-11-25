@@ -1,4 +1,6 @@
+setuptools
 webdriver-manager
 beautifulsoup4
 selenium
-pandas
+llama-index
+pydantic-settings
