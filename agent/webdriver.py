@@ -16,11 +16,11 @@ from agent.utils import *
 USERNAME = settings.LINKEDIN_USERNAME
 PASSWORD = settings.LINKEDIN_PASSWORD
 COOKIE_PATH = settings.COOKIE_PATH
-chrome_options = Options()
-chrome_options.add_argument("--headless")  # Run in headless mode
-chrome_options.add_argument("--disable-gpu")  # Disable GPU acceleration (often recommended for headless)
-chrome_options.add_argument("--window-size=1920x1080")  # Set window size to ensure all content is loaded
-
+# chrome_options = Options()
+# chrome_options.add_argument("--headless")  # Run in headless mode
+# chrome_options.add_argument("--disable-gpu")  # Disable GPU acceleration (often recommended for headless)
+# chrome_options.add_argument("--window-size=1920x1080")  # Set window size to ensure all content is loaded
+# chrome_options.add_argument("--disable-webrtc")
 def is_logged_in(driver) -> bool:
     # Check if the user is logged in by looking for a specific element
     div_body = locate_element(driver=driver, by=By.CLASS_NAME, value='application-outlet')
@@ -68,8 +68,14 @@ def login_current_account(driver: webdriver.Chrome, username: str=USERNAME, pass
 #endregion     
 
 def get_driver() -> webdriver.Chrome: # type: ignore
-    # driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Run in headless mode
+    chrome_options.add_argument("--disable-gpu")  # Disable GPU acceleration (often recommended for headless)
+    chrome_options.add_argument("--window-size=1920x1080")  # Set window size to ensure all content is loaded
+    chrome_options.add_argument("--disable-webrtc")
+    
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    # driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
 
     login_current_account(driver=driver)
 
